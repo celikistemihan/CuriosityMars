@@ -16,7 +16,12 @@ class ViewController: UITableViewController {
         title = "Mars Curiosity Rover"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        performSelector(inBackground: #selector(imageLoad), with: nil)
+        tableView.reloadData()
         
+    }
+    
+   @objc func imageLoad() {
         let fileManager = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fileManager.contentsOfDirectory(atPath: path)
@@ -27,8 +32,6 @@ class ViewController: UITableViewController {
             }
             images.sort()
         }
-        
-        
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return images.count
